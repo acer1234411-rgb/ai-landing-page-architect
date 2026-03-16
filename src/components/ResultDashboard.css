@@ -1,0 +1,218 @@
+.result-dashboard {
+  margin-top: 2rem;
+  padding: 0;
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background: rgba(30, 41, 59, 0.85); /* 0.4에서 0.85로 대폭 올려 확실히 구분 */
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  border-radius: 12px;
+}
+
+.header-titles h3 {
+  margin: 0 0 0.25rem 0;
+  color: #60a5fa;
+  font-size: 1.25rem;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #cbd5e1; /* 서브타이틀도 더 밝게 */
+}
+
+/* (중간 생략: export-btn, dashboard-grid 등 그대로 둠) */
+.export-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background: rgba(30, 41, 59, 0.9); /* 기존(0.7)보다 불투명도 크게 올려서 가시성 타격 */
+  border: 1px solid rgba(203, 213, 225, 0.5); /* 테두리를 slate-300 색상의 50%로 아주 밝게 */
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+}
+
+.span-full {
+  grid-column: 1 / -1;
+}
+
+.card-lbl {
+  margin: 0 0 1rem 0;
+  color: #a78bfa;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 하단 줄도 밝게 */
+  padding-bottom: 0.5rem;
+}
+
+/* Color Palette Styles */
+.color-palette {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.color-chip {
+  flex: 1;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5); /* 그림자 짙게 */
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
+}
+
+.color-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.color-hex {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: white;
+  align-self: flex-end;
+}
+
+.text-sm {
+  font-size: 0.65rem;
+}
+
+/* Badges */
+.badge {
+  background: rgba(147, 51, 234, 0.3); /* 배경을 더 밝게 */
+  color: #d8b4fe; /* 글씨도 제일 밝은 보라색 */
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-right: 0.5rem;
+}
+
+.badge.tech {
+  background: rgba(59, 130, 246, 0.3);
+  color: #bfdbfe;
+}
+
+.info-row {
+  font-size: 0.875rem;
+  color: #f8fafc; /* 정보를 아주 밝게 */
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.design-intent {
+  font-size: 0.875rem;
+  color: #e2e8f0; /* 의도 설명도 더 밝게 */
+  line-height: 1.6;
+}
+
+/* List and Text */
+.list-content {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: #f8fafc; /* 리스트 텍스트 밝게 */
+  line-height: 1.8;
+}
+
+.highlight {
+  color: #93c5fd; /* 하이라이트 블루를 확실히 돋보이게 */
+  font-weight: 700;
+}
+
+.code-block {
+  background: rgba(15, 23, 42, 0.95); /* 코드 블록은 거의 까맣게 */
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #bae6fd;
+  white-space: pre-wrap;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.5); /* 테두리를 확실히 표시 */
+}
+
+/* Structure Grid */
+.structure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.page-card {
+  background: rgba(15, 23, 42, 0.9); /* 서브 카드 배경도 거의 까맣게 하여 확실히 분리 */
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.main-page-card {
+  border-color: rgba(96, 165, 250, 0.8); /* Primary 테두리로 강조 상향 */
+  background: rgba(30, 41, 59, 1); /* 불투명하게 확실한 배색 차이 */
+  box-shadow: 0 4px 6px -1px rgba(96, 165, 250, 0.3);
+}
+
+.page-card h5 {
+  margin: 0 0 0.5rem 0;
+  color: #e2e8f0;
+  font-size: 1rem;
+}
+
+.desc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.mini-list {
+  padding-left: 1rem;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.content-spec {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #a78bfa;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
