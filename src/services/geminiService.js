@@ -121,3 +121,51 @@ export async function generateLandingPlan(topic, targetAudience, coreGoal) {
     throw new Error("AI와 통신하는 중 문제가 발생했습니다. \n\n" + error.message);
   }
 }
+
+/**
+ * 사용자의 주제 정보를 바탕으로 구체적인 타겟 고객과 핵심 목표를 생성해달라고 AI에 요청하는 함수
+ */
+export async function generateTargetAndGoal(topic) {
+  if (!aiClient) {
+    throw new Error("API 키가 설정되지 않았습니다. .env 폴더에 VITE_GEMINI_API_KEY 를 입력해주세요.");
+  }
+
+  try {
+    const response = await aiClient.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: `
+당신은 최고 수준의 시니어 웹/UIUX 마케팅 기획자입니다.
+다음 프로젝트 주제 정보를 바탕으로 이 웹사이트를 위한 아주 구체적이고 연관성이 높은 [타겟 고객]과 [핵심 목표]를 도출해야 합니다.
+
+[사용자 입력 정보]
+- 웹사이트 주제: ${topic}
+
+[요구사항]
+- 타겟 고객: 성별, 연령대, 직업, 관심사 등을 포함하여 매우 상세하고 생생하게 묘사해주세요. (예: 부산의 문화예술 발전에 관심이 많고 후원과 자원봉사를 통해 지역 사회에 선한 영향력을 나누고자 하는 30~40대 시민)
+- 핵심 목표: 달성 가능하면서 구체적인 수치를 포함한 매력적인 목표를 설정해주세요. (예: 온라인 캠페인을 통한 신규 정기 후원자 매월 50명 확보 및 주요 문화 행사 참관객 전환율 15% 달성)
+
+[절대 규칙]
+1. 대답은 오직 하나의 유효한 JSON 객체(Object) 형식이어야 합니다.
+2. 마크다운(\`\`\`json)으로 감싸지 않아도 무방합니다. 무조건 첫 글자는 { 로 시작하고 } 로 끝나야 합니다.
+
+[JSON 스키마 예시 규격]
+{
+  "targetAudience": "구체적이고 상세한 타겟 고객 묘사",
+  "coreGoal": "구체적이고 수치화된 핵심 행동 목표"
+}
+
+위 포맷과 입력 정보를 완벽히 분석하여, 실제 프로젝트에 즉시 투입 가능한 고민하고 생각한 깊이 있는 JSON 결과를 반환하십시오.
+      `
+    });
+
+    const aiText = response.text;
+    console.log("AI Target & Goal Text:", aiText);
+
+    return extractJsonFromText(aiText);
+
+  } catch (error) {
+    console.error("Gemini API 통신 (Target/Goal) 실패:", error);
+    throw new Error("AI와 통신하는 중 문제가 발생했습니다. \n\n" + error.message);
+  }
+}
+

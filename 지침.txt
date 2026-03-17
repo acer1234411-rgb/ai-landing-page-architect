@@ -1,0 +1,3 @@
+npm run dev
+
+github에 push하고 클라우드페어에 배포업데이트 해줘

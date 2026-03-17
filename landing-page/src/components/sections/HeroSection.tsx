@@ -17,7 +17,7 @@ export default function HeroSection() {
     >
       {/* 배경 이미지 */}
       <img
-        src="https://loremflickr.com/1600/900/store,interior,shop"
+        src="https://loremflickr.com/1600/900/store,interior,shop?lock=42"
         alt="매장 전경"
         className="absolute inset-0 w-full h-full object-cover"
       />

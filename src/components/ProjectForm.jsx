@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ProjectForm.css';
 
 import ResultDashboard from './ResultDashboard';
-import { generateLandingPlan } from '../services/geminiService';
+import { generateLandingPlan, generateTargetAndGoal } from '../services/geminiService';
 
 function ProjectForm() {
   const [formData, setFormData] = useState({
@@ -74,7 +74,7 @@ function ProjectForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleAutoFill = () => {
+  const handleAutoFill = async () => {
     if (!formData.topic) {
       alert("먼저 웹사이트 주제를 입력(또는 예시에서 선택)해주세요!");
       return;
@@ -82,21 +82,21 @@ function ProjectForm() {
 
     setIsAutoFilling(true); // AI 생각 중 모드 온!
 
-    // 주제에 매칭되는 데이터 찾기 (정확히 일치하지 않아도 기본값Fallback 제공)
-    const matchedData = autoFillMapping[formData.topic] || {
-      targetAudience: "웹사이트 주제에 관심 있는 잠재적 고객 및 사용자층",
-      coreGoal: "웹사이트 목적에 부합하는 초기 트래픽 확보 및 전환 목표 달성"
-    };
-
-    // 1.2초 기다림 효과 (비동기 체감)
-    setTimeout(() => {
+    try {
+      // AI를 호출해 구체적이고 연관성 높은 결과 도출
+      const aiResponse = await generateTargetAndGoal(formData.topic);
+      
       setFormData(prev => ({
         ...prev,
-        targetAudience: matchedData.targetAudience,
-        coreGoal: matchedData.coreGoal
+        targetAudience: aiResponse.targetAudience || "타겟 고객 분석 실패",
+        coreGoal: aiResponse.coreGoal || "핵심 목표 분석 실패"
       }));
-      setIsAutoFilling(false); // 매핑 완료 및 생각 중 모드 오프!
-    }, 1200);
+    } catch (error) {
+      console.error(error);
+      alert("자동 완성 실패: " + error.message);
+    } finally {
+      setIsAutoFilling(false); // 생각 중 모드 오프!
+    }
   };
 
   const handleSubmit = async (e) => {
